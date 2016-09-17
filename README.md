@@ -17,5 +17,5 @@ Written by Unixblackhole
 
 ## License
 
-See [Licence](Licence.md)
+See [License](LICENSE)
 
