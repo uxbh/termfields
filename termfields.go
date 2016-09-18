@@ -1,4 +1,4 @@
-//Package termfields creates updateable form fields at specified locations in the console.
+// Package termfields creates updateable form fields at specified locations in the console.
 package termfields
 
 import (
@@ -124,6 +124,7 @@ func NewField(y, x, len int, text string) (*Field, error) {
 	return &Field{f}, nil
 }
 
+// DrawBox draws or clears a box around a given field.
 func (f *field) DrawBox(boxType boxStyle) error {
 	if !tb.IsInit {
 		return fmt.Errorf("Term not Initialized")
@@ -132,15 +133,15 @@ func (f *field) DrawBox(boxType boxStyle) error {
 		return fmt.Errorf("Unknown Box Style")
 	}
 
-	//Draw Corners
+	// Draw Corners
 	tb.SetCell(f.x-1, f.y-1, boxRunesMap[boxType][0], tb.ColorDefault, tb.ColorDefault)
 	tb.SetCell(f.x+f.len+1, f.y-1, boxRunesMap[boxType][1], tb.ColorDefault, tb.ColorDefault)
 	tb.SetCell(f.x-1, f.y+1, boxRunesMap[boxType][2], tb.ColorDefault, tb.ColorDefault)
 	tb.SetCell(f.x+f.len+1, f.y+1, boxRunesMap[boxType][3], tb.ColorDefault, tb.ColorDefault)
-	//Draw Sides
+	// Draw Sides
 	tb.SetCell(f.x-1, f.y, boxRunesMap[boxType][5], tb.ColorDefault, tb.ColorDefault)
 	tb.SetCell(f.x+f.len+1, f.y, boxRunesMap[boxType][5], tb.ColorDefault, tb.ColorDefault)
-	//Draw Top
+	// Draw Top
 	for i := 0; i < f.len+1; i++ {
 		tb.SetCell(f.x+i, f.y-1, boxRunesMap[boxType][4], tb.ColorDefault, tb.ColorDefault)
 		tb.SetCell(f.x+i, f.y+1, boxRunesMap[boxType][4], tb.ColorDefault, tb.ColorDefault)
@@ -150,6 +151,7 @@ func (f *field) DrawBox(boxType boxStyle) error {
 	return nil
 }
 
+// Update changes the text for a field
 func (f *field) Update(s string) error {
 	if !tb.IsInit {
 		return fmt.Errorf("Term not Initialized")
