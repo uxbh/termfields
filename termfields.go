@@ -71,6 +71,27 @@ func Close() {
 	tb.Close()
 }
 
+// Row returns the row of a field.
+func (f *field) Row() int {
+	return f.y
+}
+
+// Column returns the column of a field.
+func (f *field) Column() int {
+	return f.x
+}
+
+// Loc defines a new location for a field.
+func (f *field) Loc(y, x int) {
+	border := f.border
+	f.Update(fmt.Sprintf("%*s", f.len, " "))
+	f.DrawBox(boxStyleClear)
+	f.x = x
+	f.y = y
+	f.DrawBox(border)
+	f.Update(f.text)
+}
+
 func (f *field) Move(dir moveDir) {
 	border := f.border
 	f.DrawBox(boxStyleClear)
