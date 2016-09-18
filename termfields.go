@@ -11,7 +11,7 @@ var boxRunesMap map[boxStyle][]rune
 
 type (
 	boxStyle uint16
-	moveDir  uint16
+	shiftDir uint16
 )
 
 // Flags to style a box border around a field
@@ -22,12 +22,12 @@ const (
 	BoxStyleUnicode
 )
 
-// Flags to move a field in a specified direction
+// Flags to Shift a field in a specified direction
 const (
-	FieldMoveLeft moveDir = iota
-	FieldMoveRight
-	FieldMoveUp
-	FieldMoveDown
+	FieldShiftLeft shiftDir = iota
+	FieldShiftRight
+	FieldShiftUp
+	FieldShiftDown
 )
 
 // Field is the identifier for a specific form field on the screen.
@@ -92,17 +92,18 @@ func (f *field) Loc(y, x int) {
 	f.Update(f.text)
 }
 
-func (f *field) Move(dir moveDir) {
+// Shift shifts a field a direction based on the value of a moveDir
+func (f *field) Shift(dir shiftDir) {
 	border := f.border
 	f.DrawBox(boxStyleClear)
 	switch {
-	case dir == FieldMoveLeft:
+	case dir == FieldShiftLeft:
 		f.x--
-	case dir == FieldMoveRight:
+	case dir == FieldShiftRight:
 		f.x++
-	case dir == FieldMoveUp:
+	case dir == FieldShiftUp:
 		f.y--
-	case dir == FieldMoveDown:
+	case dir == FieldShiftDown:
 		f.y++
 	}
 	f.DrawBox(border)
