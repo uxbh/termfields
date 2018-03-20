@@ -7,7 +7,7 @@ A Go Library for creating and updating console based UIs.
 ## Installation
 
 ```
-go get -u gitlab.com/uxbh/termfields
+go get -u github.com/uxbh/termfields
 ```
 
 ## Contributors
